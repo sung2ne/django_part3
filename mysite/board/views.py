@@ -21,12 +21,12 @@ def board_create(request):
     else:
         form = BoardForm()
         
-    return render(request, 'board/board_create.html', {'form': form})
+    return render(request, 'board/create.html', {'form': form})
 
 # 게시글 보기
 def board_read(request, board_id):
     board = Board.objects.get(id=board_id)
-    return render(request, 'board/board_read.html', {'board': board})
+    return render(request, 'board/read.html', {'board': board})
 
 # 게시글 수정
 def board_update(request, board_id):
@@ -49,7 +49,7 @@ def board_update(request, board_id):
     else:
         form = BoardForm(instance=board)
         
-    return render(request, 'board/board_update.html', {'form': form})
+    return render(request, 'board/update.html', {'form': form})
 
 # 게시글 삭제
 def board_delete(request, board_id):
@@ -66,5 +66,5 @@ def board_delete(request, board_id):
 
 # 게시글 목록
 def board_list(request):
-    boards = Board.objects.all()
-    return render(request, 'board/board_list.html', {'boards': boards})
+    boards = Board.objects.all().order_by('-id')
+    return render(request, 'board/list.html', {'boards': boards})
